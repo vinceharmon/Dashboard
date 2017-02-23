@@ -28,12 +28,12 @@ The folder structure of the JS files reflects a standard Angular 2.0 folder stru
     * `workitems.model`: Contains all models for the work items.
     * `workitems.service`: WorkItems service implementation.
 
-* `src/app/workdetails`: Components allowind the editing of a specific work item.
-    * `workdetails.component`: Contains all the components, imports, services, providers and other pieces that make up the dashboard module.
-    * `workstep.component`: Contains all the components, imports, services, providers and other pieces that make up the dashboard module.
+* `src/app/workdetails`: Components allowing the editing of a specific work item.
+    * `workdetails.component`: Component allowing the editing of the top-level work item.
+    * `workstep.component`: Component that is embedded inside of the workdetails.component, allowing for editing of the multiple steps associated with each work item.
 
 * `src/app/workitems`
-    * `workitems.component`: Components displaying all current work items.
+    * `workitems.component`: Component displaying all current work items.
 
 ## Getting started
 
@@ -47,9 +47,15 @@ The folder structure of the JS files reflects a standard Angular 2.0 folder stru
 
 ## Code description
 
+The application is a typical dashboard view with a header section for navigation and a landing section to display different views.  
 
+The default view displays all the work items currently waiting to be processed.  The work items have been retrieved from a RESTful API.
+The work items can then be deleted, viewed in detail and updated.  The detail view of each work items shows the embedding of components 
+and the mechanisms for cross component communication.  Validation is applied to the proper fields.
 
+The setting view displays all the current settings (name/value pairs) and allows for editing.  Validation is applied to the proper fields.
 
+All updates and deletes call a RESTful API.
 
 
 ## License
