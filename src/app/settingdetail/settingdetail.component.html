@@ -1,0 +1,27 @@
+<form [formGroup]="settingsForm" (ngSubmit)="doSave($event)" class="form-horizontal">
+  <div class="col-xs-12">
+    <div class="row text-center">
+      <label class="col-xs-12">Setting</label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-xs-2 control-label">Name:</label>
+    <div class="col-xs-10">
+      <span class="form-control" >{{item.name}}</span>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-xs-2 control-label">Value:</label>
+    <div class="col-xs-10">
+      <input formControlName="value" type="text" placeholder="Value" [(ngModel)]="item.value" class="form-control">
+      <span [hidden]="vvalue" class="text-danger"><b>Required</b></span>
+    </div>
+  </div>
+
+  <div class="col-xs-12 text-center"> 
+    <button name="button" class="btn btn-primary" type="submit">Save</button>
+    <button name="button" class="btn" type="button" (click)="doCancel($event)">Cancel</button>
+  </div>  
+</form>

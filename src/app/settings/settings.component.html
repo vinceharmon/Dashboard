@@ -1,0 +1,18 @@
+<div class="table-responsive">
+    <table class="table table-condensed table-bordered" *ngIf="settings.items.length > 0">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of settings.items">
+                <td>
+                    <a [routerLink]="['/settings', i.name]">{{i.name}}</a>
+                </td>
+                <td>{{i.value}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

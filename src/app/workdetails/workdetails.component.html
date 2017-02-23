@@ -1,0 +1,52 @@
+<form [formGroup]="detailForm" (ngSubmit)="doSave($event)" class="form-horizontal">
+  <div class="col-xs-12">
+    <div class="row text-center">
+      <label class="col-xs-12">Work Item</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-xs-2 control-label">Name:</label>
+    <div class="col-xs-10">
+      <input formControlName="name" type="text" placeholder="Work item name" [(ngModel)]="item.name" class="form-control">
+      <span [hidden]="bName == false" class="text-danger"><b>Required</b></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-xs-2 control-label">Description:</label>
+    <div class="col-xs-10">
+      <input formControlName="description" type="text" placeholder="Work item description" [(ngModel)]="item.description" class="form-control">
+      <span [hidden]="bDesc == false" class="text-danger"><b>Required</b></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-xs-2 control-label">Date:</label>
+    <div class="col-xs-10">
+      <span class="form-control" >{{item.date}}</span>
+    </div>
+  </div>
+
+  <div class="col-xs-12" *ngIf="item.steps.length > 0">
+
+    <div class="row text-center">
+      <label class="col-xs-12">Work Item Steps</label>
+    </div>
+
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let i of item.steps">
+
+      <!-- Pass in each step to the workstep component -->
+      <app-workstep [step]=i (stepUpdated)="stepUpdated($event)">
+      </app-workstep>
+
+      </li>
+    </ul>
+  </div>
+  <div class="col-xs-12" *ngIf="item.steps.length == 0">
+    <h4 *ngIf="item.steps.length == 0">There are no work item steps</h4>
+  </div>
+
+  <div class="col-xs-12 text-center"> 
+    <button name="button" class="btn btn-primary" type="submit">Save</button>
+    <button name="button" class="btn" type="button" (click)="doCancel($event)">Cancel</button>
+  </div>  
+</form>

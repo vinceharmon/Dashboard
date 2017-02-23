@@ -1,0 +1,24 @@
+<div class="table-responsive">
+    <table class="table table-condensed table-bordered" *ngIf="workItems.length > 0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of workItems">
+                <td>
+                    <a [routerLink]="['/workdetail', i.id]">{{i.id}}</a>
+                </td>
+                <td>{{i.name}}</td>
+                <td>{{i.description}}</td>
+                <td>
+                    <a (click)="onRemove(i)" style="cursor: pointer">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
