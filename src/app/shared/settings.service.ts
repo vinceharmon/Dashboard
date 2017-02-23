@@ -14,7 +14,7 @@ export class SettingsService {
   public settings : Settings = null;
   public response : SettingRS;
 
-  //Constructor
+  //Inject HTTP
   constructor(private http:Http) { 
 
   }
@@ -22,12 +22,14 @@ export class SettingsService {
   //Get all the current settings
   getCurrentSettings() {
 
+    //Reload settings if they haven't been loaded yet
     if(this.settings == null) {
 
       //Returns and observable
       return fakeRequest.get(this.http, "/settings.local")
        .map( res => this.settings = JSON.parse(res));
     }
+    //Get the current settings
     else{
 
       //Return an observable
@@ -40,7 +42,7 @@ export class SettingsService {
   //Update setting
   update(item: SettingItem) {
 
-    //Find the item using the name
+    //Find the setting using the name
     var f = this.settings.items.find(c=> c.name == item.name);
 
     //Check to make sure found
@@ -52,7 +54,7 @@ export class SettingsService {
       //Update the setting
       this.settings.items[idx] = item;
 
-      //Update the item from the store
+      //Update the setting in the store
       return fakeRequest.post(this.http, "/settings.local", item)
         .map( res => this.response = JSON.parse(res));
     }

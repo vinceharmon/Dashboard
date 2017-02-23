@@ -14,19 +14,21 @@ export class WorkitemsService {
   public workItems : WorkItem[] = [];
   public response : WorkItemRS;
 
-  //Constructor
+  //Inject http
   constructor(private http:Http) { 
   }
 
   //Get all the current items
   getCurrentWorkItems() {
 
+    //If not loaded yet, then load
     if(this.workItems.length == 0) {
 
       //Returns and observable
       return fakeRequest.get(this.http, "/workitems.local")
        .map( res => this.workItems = JSON.parse(res));
     }
+    //Just return current list
     else{
 
       //Return an observable
@@ -48,7 +50,7 @@ export class WorkitemsService {
       //Remove item from list
       this.workItems.splice(idx, 1);
 
-      //Delete the item from the store
+      //Delete the work item from the store
       return fakeRequest.delete(this.http, "/workitems.local", item)
         .map( res => this.response = JSON.parse(res));
     }
@@ -78,7 +80,7 @@ export class WorkitemsService {
       //Update the item
       this.workItems[idx] = item;
 
-      //Update the item from the store
+      //Update the work item from the store
       return fakeRequest.post(this.http, "/workitems.local", item)
         .map( res => this.response = JSON.parse(res));
     }

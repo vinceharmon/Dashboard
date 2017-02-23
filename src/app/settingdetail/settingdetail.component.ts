@@ -17,11 +17,12 @@ export class SettingdetailComponent implements OnInit {
     value: ["", Validators.required]
   });
 
-  public vvalue: boolean = true;
+  public bValue: boolean = false;
 
-  constructor(public fb: FormBuilder, private activateRoute: ActivatedRoute, private service: SettingsService, private router: Router) {
+  //Injecting all the relevant classes
+  constructor(private fb: FormBuilder, private activateRoute: ActivatedRoute, private service: SettingsService, private router: Router) {
 
-    //Get the parameter
+    //Get the name parameter
     this.activateRoute.params.subscribe(p=> this.name = p['name']);
   }
 
@@ -34,7 +35,7 @@ export class SettingdetailComponent implements OnInit {
     this.item = new SettingItem(s.name, s.value);
   }
 
-  //Save the changes if there are any
+  //Save the changes handler
   doSave(event) {
 
     //Has the form changed
@@ -42,15 +43,15 @@ export class SettingdetailComponent implements OnInit {
 
       //Is value valid, if not get out
       if(!this.settingsForm.controls['value'].valid) {
-        this.vvalue = false;
+        this.bValue = true;
 
         return;
       }
 
-      //Save changes
+      //Save changes to property
       this.item.value = this.settingsForm.controls['value'].value;
 
-      //Update the data
+      //Update the data, calling the service
       this.service.update(this.item).subscribe(
       res => { 
         console.log('Setting updated'); 
@@ -58,8 +59,10 @@ export class SettingdetailComponent implements OnInit {
         //Go back
         this.router.navigate(["/settings"]);
       }, 
-      err => {}, () => {});
+      err => {}, 
+      () => {});
     }
+    //No errors
     else {
 
       //Go back
@@ -67,14 +70,7 @@ export class SettingdetailComponent implements OnInit {
     }
   }
 
-  //On update completion callback
-  onUpdateCompletion(thisPtr, item: SettingItem) {
-
-    //Go back
-    thisPtr.router.navigate(["/settings"]);
-  }
-  
-  //Cancel button
+  //Cancel handler handler
   doCancel(event) {
 
     //Go back

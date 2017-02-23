@@ -10,6 +10,7 @@ export class SettingsComponent implements OnInit {
 
   public settings : Settings = null;
 
+  //Use injection to pass in the setting service
   constructor(private service: SettingsService) { }
 
   ngOnInit() {

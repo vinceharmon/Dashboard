@@ -24,7 +24,8 @@ export class WorkdetailsComponent implements OnInit {
   public bDesc: boolean = false;
   public bStepChanged: boolean = false;
 
-  constructor(public fb: FormBuilder, private activateRoute: ActivatedRoute, private service: WorkitemsService, private router: Router) {
+  //Inject
+  constructor(private fb: FormBuilder, private activateRoute: ActivatedRoute, private service: WorkitemsService, private router: Router) {
 
     //Get the parameter
     this.activateRoute.params.subscribe(p=> this.id = p['id']);
@@ -80,6 +81,7 @@ export class WorkdetailsComponent implements OnInit {
       }, 
       err => {}, () => {});
     }
+    //No dirty, just route
     else {
 
       //Go back
@@ -87,7 +89,7 @@ export class WorkdetailsComponent implements OnInit {
     }
   }
 
-  //Cancel button
+  //Cancel 
   doCancel(event) {
 
     //Go back
